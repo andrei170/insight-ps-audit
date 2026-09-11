@@ -1,0 +1,347 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Insight PS - Website Audit</title><style>
+:root{--bg:#0d1117;--panel:#161b22;--ink:#e6edf3;--mut:#9aa7b4;--line:#2a3340;--accent:#2f81f7;
+  --good:#3fb950;--bad:#f85149;--gradF:#f85149;--gradD:#e8702a;--gradC:#d29922;--gradB:#3fb950;--gradA:#2ea043;}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;background:var(--bg);color:var(--ink);line-height:1.5;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1080px;margin:0 auto;padding:0 22px}
+.eyebrow{letter-spacing:.18em;text-transform:uppercase;font-size:12px;color:var(--mut);font-weight:600}
+header{padding:46px 0 28px;border-bottom:1px solid var(--line);background:radial-gradient(1200px 400px at 70% -10%,rgba(47,129,247,.18),transparent)}
+h1{font-size:30px;font-weight:800;margin:10px 0 6px;letter-spacing:-.01em}
+.sub{color:var(--mut);font-size:15px}
+.hero{display:grid;grid-template-columns:300px 1fr;gap:26px;align-items:center;margin:34px 0 8px}
+@media(max-width:760px){.hero{grid-template-columns:1fr}}
+.gradecard{border:1px solid var(--line);border-radius:18px;padding:26px;text-align:center;position:relative;overflow:hidden}
+.gc-F{background:linear-gradient(160deg,#2a1410,#1c2330)}.gc-D{background:linear-gradient(160deg,#2a1c10,#1c2330)}
+.gc-C{background:linear-gradient(160deg,#2a2410,#1c2330)}.gc-B{background:linear-gradient(160deg,#102a1a,#1c2330)}
+.bigletter{font-size:96px;font-weight:900;line-height:1;position:relative}
+.bl-F{color:var(--gradF);text-shadow:0 0 40px rgba(248,81,73,.45)}
+.bl-D{color:var(--gradD);text-shadow:0 0 40px rgba(232,112,42,.45)}
+.bl-C{color:var(--gradC);text-shadow:0 0 40px rgba(210,153,34,.45)}
+.score100{font-size:18px;color:var(--mut);margin-top:6px;position:relative}
+.heroread h2{font-size:21px;font-weight:800;margin-bottom:10px}
+.heroread p{color:var(--mut);font-size:15.5px}
+.heroread .tag{display:inline-block;margin-top:14px;padding:6px 12px;border:1px solid var(--line);border-radius:999px;font-size:13px;color:var(--ink);background:var(--panel)}
+section{padding:34px 0;border-bottom:1px solid var(--line)}
+.h{font-size:13px;color:var(--mut);text-transform:uppercase;letter-spacing:.14em;font-weight:700;margin-bottom:18px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media(max-width:760px){.grid{grid-template-columns:1fr}}
+.row{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:14px 16px;display:grid;grid-template-columns:1fr auto;gap:10px;align-items:center}
+.rname{font-weight:600;font-size:15px}
+.bar{height:7px;background:#0b0f15;border-radius:99px;margin-top:9px;overflow:hidden}
+.fill{height:100%;border-radius:99px}
+.badge{font-weight:800;font-size:15px;min-width:46px;height:46px;border-radius:10px;display:flex;align-items:center;justify-content:center;color:#0d1117}
+.gF{background:var(--gradF)}.gD{background:var(--gradD)}.gC{background:var(--gradC)}.gB{background:var(--gradB);color:#06210f}.gA{background:var(--gradA);color:#06210f}
+.sc{font-size:12px;color:var(--mut);margin-top:3px}
+.flag{background:linear-gradient(160deg,#2a1410,#161b22);border:1px solid #6f2a1f;border-radius:14px;padding:20px 22px;margin-bottom:14px}
+.flag .lab{font-size:12px;text-transform:uppercase;letter-spacing:.12em;color:var(--bad);font-weight:700;margin-bottom:8px}
+.win{background:linear-gradient(160deg,#0f2417,#161b22);border:1px solid #1f6f3a;border-radius:14px;padding:20px 22px;margin-bottom:14px}
+.win .lab{font-size:12px;text-transform:uppercase;letter-spacing:.12em;color:var(--good);font-weight:700;margin-bottom:8px}
+.warn{background:linear-gradient(160deg,#2a2410,#161b22);border:1px solid #6f5a1f;border-radius:14px;padding:20px 22px;margin-bottom:14px}
+.warn .lab{font-size:12px;text-transform:uppercase;letter-spacing:.12em;color:var(--gradC);font-weight:700;margin-bottom:8px}
+.flag p,.win p,.warn p{color:var(--mut);font-size:14.5px;margin-bottom:9px}
+.flag p:last-child,.win p:last-child,.warn p:last-child{margin-bottom:0}
+.flag b,.win b,.warn b{color:var(--ink)}
+.flag ul,.win ul,.warn ul{margin:0 0 9px 20px;color:var(--mut);font-size:14.5px}
+.flag li,.win li,.warn li{margin-bottom:6px}
+.code{background:#0b0f15;border:1px solid var(--line);border-radius:8px;padding:14px 16px;margin:12px 0;font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:12.5px;line-height:1.85;color:var(--mut);overflow-x:auto}
+.code .ph{color:#ff9d94;font-weight:700}.code .ok{color:#84e0a8;font-weight:700}.code .c{color:#5b6672}
+.cmp{width:100%;border-collapse:collapse;font-size:14px;background:var(--panel);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+.cmp th{text-align:left;padding:11px 14px;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--mut);border-bottom:1px solid var(--line);font-weight:700}
+.cmp td{padding:11px 14px;border-bottom:1px solid var(--line);color:var(--mut);vertical-align:top}
+.cmp tr:last-child td{border-bottom:none}.cmp td b{color:var(--ink)}.cmp tr.you td{background:#241a12}
+.cmp .yes{color:var(--good);font-weight:700}.cmp .no{color:var(--bad);font-weight:700}
+.opp{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+@media(max-width:760px){.opp{grid-template-columns:1fr}}
+.ocard{background:linear-gradient(160deg,#0f2417,#161b22);border:1px solid #1f6f3a;border-radius:14px;padding:20px;text-align:center}
+.ocard .lab{font-size:12px;text-transform:uppercase;letter-spacing:.12em;color:var(--mut)}
+.ocard .big{font-size:30px;font-weight:900;color:var(--good);margin:8px 0 2px}
+.ocard .small{font-size:13px;color:var(--mut)}
+.oppnote{color:var(--mut);font-size:14px;margin-top:14px}.oppnote b{color:var(--ink)}
+.arrow{display:flex;align-items:center;justify-content:center;gap:18px;margin:6px 0 2px;flex-wrap:wrap}
+.pill{font-size:60px;font-weight:900;line-height:1}
+.pill.from-F{color:var(--gradF)}.pill.from-D{color:var(--gradD)}.pill.from-C{color:var(--gradC)}
+.pill.to{color:var(--gradA)}
+.pilllab{font-size:12px;color:var(--mut);text-align:center;text-transform:uppercase;letter-spacing:.1em}
+.ar{font-size:34px;color:var(--mut)}
+ul.road{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:10px}
+@media(max-width:760px){ul.road{grid-template-columns:1fr}}
+ul.road li{background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:8px;padding:11px 14px;font-size:14.5px}
+.road2 li{border-left-color:var(--good)}
+.cta{text-align:center;padding:40px 0 56px}
+.cta h2{font-size:22px;font-weight:800;margin-bottom:8px}
+.cta p{color:var(--mut);font-size:15px}
+footer{color:var(--mut);font-size:12.5px;text-align:center;padding:22px 0 40px;line-height:1.7}
+.gscale{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:26px 26px 20px;margin-top:16px}
+.gscale .gtitle{font-size:12px;text-transform:uppercase;letter-spacing:.12em;color:var(--mut);font-weight:700;margin-bottom:26px;text-align:center}
+.gtrack{position:relative;height:14px;border-radius:8px;background:linear-gradient(90deg,#f85149 0%,#f85149 18%,#e3833c 34%,#d4a72c 52%,#7ec46a 74%,#3fb950 100%);margin:0 4px}
+.gmark{position:absolute;top:-46px;transform:translateX(-50%);text-align:center;white-space:nowrap}
+.gmark .gm-lab{font-size:10.5px;text-transform:uppercase;letter-spacing:.1em;color:var(--mut);font-weight:700}
+.gmark .gm-val{font-size:19px;font-weight:900;line-height:1.15}
+.gmark:after{content:"";position:absolute;left:50%;top:100%;width:2px;height:22px;transform:translateX(-50%);background:currentColor;opacity:.75}
+.gmark.now{color:var(--bad)}.gmark.now .gm-val{color:var(--bad)}
+.gmark.proj{color:var(--good)}.gmark.proj .gm-val{color:var(--good)}
+.gmark.proj{top:auto;bottom:-52px}
+.gmark.proj:after{top:auto;bottom:100%}
+.gdot{position:absolute;top:50%;width:16px;height:16px;border-radius:50%;transform:translate(-50%,-50%);border:3px solid #0d1117}
+.gdot.now{background:var(--bad)}.gdot.proj{background:var(--good)}
+.gticks{display:flex;justify-content:space-between;margin:66px 4px 0;font-size:11px;letter-spacing:.08em;color:var(--mut);font-weight:700}
+@media(max-width:620px){.gmark .gm-lab{font-size:9px}.gmark .gm-val{font-size:16px}}
+</style></head><body>
+<header>
+  <div class="wrap">
+    <div class="eyebrow">Website Audit &middot; Driveways, Paving &amp; Roofing &middot; Manchester &amp; North West</div>
+    <h1>You Have Built 732 Pages And You Cannot Tell Me If One Of Them Has Ever Worked.</h1>
+    <div class="sub">Prepared for Francis Maguire &middot; Insight PS Limited &middot; 11 September 2026 &middot; AG1 Consulting</div>
+
+    <div class="hero">
+      <div class="gradecard gc-F">
+        <div class="bigletter bl-F" style="font-size:52px">732</div>
+        <div class="score100">town pages built &middot; 0 analytics installed</div>
+      </div>
+      <div class="heroread">
+        <h2>Most firms we audit have not done the work. You have done the work. Nobody put a meter on it.</h2>
+        <p>Twelve services across sixty-one towns. That is a proper local SEO structure and it took real
+        effort to build.</p>
+        <p><b>There is no analytics code on your website. None.</b> No Google Analytics, no tag manager,
+        no advertising pixel. So there is no way to know which of those 732 pages brings in work, which
+        towns actually convert, or whether the whole thing is carrying you or costing you.</p>
+        <div class="tag">Read from insightps.co.uk's own sitemap and page source, 11 September 2026</div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section>
+  <div class="wrap">
+    <div class="h">Finding 1 &mdash; You Sell Roofing And You Have No Roofing Pages</div>
+    <div class="code">
+Your homepage says, in its own words:
+
+  "Our Roofing, Paving and Groundworks Work"
+  "Comprehensive Roofing Services"
+  "our skills extend from the ground to the roof"
+
+Your own structured data tells Google what kind of business you are:
+
+  "mainEntityOfPage": <span class="ok">"RoofingContractor"</span>
+
+Now here is every service you have actually built pages for:
+
+  artificial-grass-installation     indian-sandstone-patios
+  block-paving                      paving-repairs-and-maintenance
+  brickwork-and-garden-walls        resin-bound-driveways
+  driveways-and-landscaping         tarmac-driveways
+  garden-design                     turfing-and-lawns
+  garden-fencing                    groundworks-and-site-preparation
+
+  Pages whose address contains the word "roof": <span class="ph">0</span>
+  Pages for garden fencing: <span class="ok">61</span>
+    </div>
+    <div class="flag">
+      <div class="lab">This is the single biggest gap on the site</div>
+      <p>You have told Google you are a <b>roofing contractor</b>. You tell visitors you do roofing in
+      the first heading on the page. And you have built <b>sixty-one pages about garden fencing and
+      none at all about roofing.</b></p>
+      <p>Roofing is typically a higher-value job than a fence. If it is genuinely a service you want,
+      the machine you have already built will produce roofing pages the same way it produced fencing
+      ones &mdash; <b>the structure exists, the service is simply missing from it.</b></p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="h">Finding 2 &mdash; There Is No Measurement Of Any Kind</div>
+    <div class="code">
+Every script tag on your homepage:
+
+  &lt;script&gt;                              x4   <span class="ok">(site's own code)</span>
+  &lt;script type="application/ld+json"&gt;   x2   <span class="ok">(structured data - good)</span>
+
+  External analytics scripts: <span class="ph">0</span>
+
+What is NOT there:
+
+  Google Analytics / GA4 ......... <span class="ph">absent</span>
+  Google Tag Manager ............. <span class="ph">absent</span>
+  Google Ads conversion tag ...... <span class="ph">absent</span>
+  Meta / Facebook pixel .......... <span class="ph">absent</span>
+  Any call tracking .............. <span class="ph">absent</span>
+
+We checked a town page as well as the homepage. Same result.
+    </div>
+    <div class="warn">
+      <div class="lab">Why this is the expensive one</div>
+      <p>You have sixty-one towns. Some of them will be producing enquiries and some will be producing
+      nothing. <b>Right now those two categories look identical to you.</b></p>
+      <p>It also means that if you ever advertise &mdash; Google, Meta, anything &mdash; you would be
+      spending blind from day one. No advertising should start before this is fixed, and fixing it is
+      a short job, not a project.</p>
+      <p><b>This is the prerequisite for everything else in this document.</b></p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="h">Finding 3 &mdash; Your Reputation May Be Filed Under A Different Name</div>
+    <div class="flag">
+      <div class="lab">Fourteen years of Checkatrade, and a six-month-old name</div>
+      <p>You told our team you have been with <b>Checkatrade for about fourteen years</b>. That is a
+      serious asset &mdash; it is the thing a homeowner checks before they let you on the drive.</p>
+      <p>Two things we found that are worth a conversation:</p>
+      <ul>
+        <li><b>Insight PS Limited was incorporated on 6 March 2025</b> &mdash; six months ago. Your
+        site says over twenty-five years of experience. Both can be true, and usually are: a long-standing
+        trader who incorporated recently. But the <i>name</i> "Insight PS" is new.</li>
+        <li><b>The trade-body link on your own website points to a profile under a different trading
+        name</b> &mdash; the address ends <code>insight-blockpaving-driveways</code>, not Insight PS.</li>
+      </ul>
+      <p>If fourteen years of reviews sit under one name and the website is building another, <b>the
+      trust does not transfer automatically.</b> Somebody who searches "Insight PS reviews" may find
+      very little, while the actual record is under the older name.</p>
+      <p><b>Not assessed:</b> we could not load the trade profile itself, so we make no claim about how
+      many reviews exist or what they say. This is a question to answer, not a finding to act on blind.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="h">Finding 4 &mdash; Nothing On The Site Speaks To The Problem You Named</div>
+    <div class="code">
+Pages on insightps.co.uk about joining the team:
+
+  careers ......... <span class="ph">0</span>
+  vacancies ....... <span class="ph">0</span>
+  jobs ............ <span class="ph">0</span>
+  work for us ..... <span class="ph">0</span>
+    </div>
+    <div class="warn">
+      <div class="lab">You said the constraint is staff, not enquiries</div>
+      <p>You told our team you need more people so you can take on more jobs. That makes recruitment
+      the binding constraint &mdash; and there is nothing on a 747-page website aimed at a groundworker
+      or a paver deciding where to work next.</p>
+      <p><b>You already own the machine that would fix this.</b> The same structure that generated
+      sixty-one town pages per service will generate a careers page and town-level hiring pages. It is
+      the cheapest possible use of infrastructure you have already paid for.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="h">What Is Genuinely Good Here</div>
+    <div class="win">
+      <div class="lab">So this does not read as a list of complaints</div>
+      <ul>
+        <li><b>The town-page structure is real and most of your competitors will not have one.</b>
+        Twelve services by sixty-one towns is a serious build.</li>
+        <li><b>Your structured data is properly done.</b> LocalBusiness markup, geo-coordinates,
+        opening hours, a price range and a genuine FAQ block with real questions in it. That is better
+        than most trade sites we look at.</li>
+        <li><b>Checkatrade and TrustMark are both referenced.</b> Those are exactly the signals this
+        market responds to.</li>
+        <li><b>The site is fast and clean</b> &mdash; which is partly <i>because</i> nothing is loaded
+        onto it. Adding analytics properly will not undo that.</li>
+        <li><b>Over twenty-five years of experience and fourteen years of trade-body history.</b> That
+        is the hardest thing on this page to buy and you already have it.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="h">The Scorecard</div>
+    <div class="grid">
+      <div class="row"><div class="rname">Analytics installed</div><div class="sc"><span class="badge gF">F</span> None of any kind, on any page checked</div></div>
+      <div class="row"><div class="rname">Conversion tracking</div><div class="sc"><span class="badge gF">F</span> Absent &mdash; no pixel, no tag, no call tracking</div></div>
+      <div class="row"><div class="rname">Roofing pages</div><div class="sc"><span class="badge gF">F</span> Zero, despite selling roofing on the homepage</div></div>
+      <div class="row"><div class="rname">Careers / recruitment content</div><div class="sc"><span class="badge gF">F</span> None, and staff is the stated constraint</div></div>
+      <div class="row"><div class="rname">Brand continuity with trade profiles</div><div class="sc"><span class="badge gD">D</span> Link points to a different trading name</div></div>
+      <div class="row"><div class="rname">Town coverage</div><div class="sc"><span class="badge gA">A</span> 61 towns across 12 services</div></div>
+      <div class="row"><div class="rname">Structured data</div><div class="sc"><span class="badge gA">A</span> LocalBusiness, FAQ, geo, hours, price range</div></div>
+      <div class="row"><div class="rname">Service page depth</div><div class="sc"><span class="badge gB">B</span> 12 services with their own index pages</div></div>
+      <div class="row"><div class="rname">Trade accreditation referenced</div><div class="sc"><span class="badge gB">B</span> Checkatrade and TrustMark both mentioned</div></div>
+      <div class="row"><div class="rname">Contact details on site</div><div class="sc"><span class="badge gB">B</span> Landline and an email on the own domain</div></div>
+      <div class="row"><div class="rname">Page speed &amp; weight</div><div class="sc"><span class="badge gB">B</span> Light, no third-party bloat</div></div>
+      <div class="row"><div class="rname">Own photography</div><div class="sc"><span class="badge gC">C</span> Not assessed for originality</div></div>
+      <div class="row"><div class="rname">Google Business Profile</div><div class="sc"><span class="badge gC">C</span> Not assessed</div></div>
+      <div class="row"><div class="rname">Town page quality</div><div class="sc"><span class="badge gC">C</span> Not assessed &mdash; structure checked, content not graded</div></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="h">What We Would Do, In Order</div>
+    <ul class="road">
+      <li><b>Install analytics and conversion tracking this week.</b> Nothing else on this list can be
+      judged until you can see. This is days, not weeks.</li>
+      <li><b>Wait a month and read it.</b> Find out which of the sixty-one towns actually produce
+      enquiries. Our guess is that a small number do most of the work &mdash; but it would be a guess,
+      and you would be paying us to stop guessing.</li>
+      <li><b>Settle the name question.</b> Decide whether Insight PS or the older trading name carries
+      the reputation, and make the website, the trade profiles and the Google listing agree.</li>
+      <li><b>Build the roofing pages</b> &mdash; if roofing is genuinely a service you want. The
+      structure already exists; this is populating it, not inventing it.</li>
+      <li><b>Build one careers page and point local traffic at it.</b> Staff is your stated constraint.
+      Recruitment advertising is cheap in this trade because almost nobody bids on it.</li>
+      <li><b>Only then consider paid advertising.</b> With tracking in place and the best towns known,
+      paid traffic becomes a decision rather than a gamble.</li>
+    </ul>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="h">Where This Lands</div>
+    <div class="gscale">
+      <span class="pill">Today: <b>D &mdash; 55/100</b></span>
+      <span class="arrow">&rarr;</span>
+      <span class="pill">Achievable: <b>A &mdash; 91/100</b></span>
+    </div>
+    <p style="text-align:center;color:var(--mut);margin-top:14px">Higher than most sites we audit,
+    because the hard part is already built. The score is held down by measurement, not by craft.</p>
+  </div>
+</section>
+
+<div class="cta">
+  <div class="wrap">
+    <h2>You built the engine. Nobody fitted a dial.</h2>
+    <p>732 town pages, and no way to tell which of them is earning its keep.</p>
+  </div>
+</div>
+
+<footer>
+  <div class="wrap">
+    Prepared by Andrei Givero &middot; AG1 Consulting &middot; 11 September 2026<br><br>
+    For Francis Maguire, Insight PS Limited, Manchester. <b>Every figure on this page was read from
+    insightps.co.uk's own published XML sitemap and served page source on 11 September 2026 and is
+    reproducible</b> &mdash; the 747 published URLs, the twelve service paths, the sixty-one towns per
+    service, the absence of any URL containing "roof", the absence of any careers or vacancies page,
+    the <span style="font-family:monospace">RoofingContractor</span> value in the site's own structured
+    data, and the script tags present on the homepage and on a sampled town page. <b>The statement that
+    no analytics are installed means no analytics, tag manager, advertising pixel or call-tracking code
+    was present in the served HTML of the pages we checked on that date</b>; server-side or
+    platform-level measurement we cannot see from outside was not assessed. Company details were
+    confirmed against the Companies House register: <b>Insight PS Limited, company number 16297136,
+    incorporated 6 March 2025</b>, with Francis Joseph Maguire recorded as director and secretary.
+    <b>Items marked "not assessed" were not checked and must not be read as an absence.</b> The
+    reference to a trade profile under a different trading name is based solely on the link address
+    published on Insight PS's own website; <b>we were unable to load that profile and make no claim
+    about its content, its review count, its rating or whether it is current.</b> The twenty-five years
+    of experience is as stated on the company's own website, and the fourteen years with Checkatrade
+    and the shortage of staff are <b>as reported by Francis Maguire to our team and have not been
+    independently verified.</b> <b>We have not seen inside any analytics, advertising account, customer
+    record or financial record</b>, and <b>no revenue, enquiry volume, ranking position or return
+    figure is forecast anywhere in this document.</b> No claim is made about what any work described
+    here would produce. Company and trade-body names are used for identification only and belong to
+    their respective owners. The grades shown are AG1's own editorial assessment against the checklist
+    above, not an industry-standard measurement.
+  </div>
+</footer>
+</body></html>
