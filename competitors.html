@@ -1,0 +1,292 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Insight PS - Competitor Analysis</title><style>
+:root{--bg:#0d1117;--panel:#161b22;--ink:#e6edf3;--mut:#9aa7b4;--line:#2a3340;--accent:#2f81f7;
+  --good:#3fb950;--bad:#f85149;--gradF:#f85149;--gradD:#e8702a;--gradC:#d29922;--gradB:#3fb950;--gradA:#2ea043;}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;background:var(--bg);color:var(--ink);line-height:1.5;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1080px;margin:0 auto;padding:0 22px}
+.eyebrow{letter-spacing:.18em;text-transform:uppercase;font-size:12px;color:var(--mut);font-weight:600}
+header{padding:46px 0 28px;border-bottom:1px solid var(--line);background:radial-gradient(1200px 400px at 70% -10%,rgba(47,129,247,.18),transparent)}
+h1{font-size:30px;font-weight:800;margin:10px 0 6px;letter-spacing:-.01em}
+.sub{color:var(--mut);font-size:15px}
+.hero{display:grid;grid-template-columns:300px 1fr;gap:26px;align-items:center;margin:34px 0 8px}
+@media(max-width:760px){.hero{grid-template-columns:1fr}}
+.gradecard{border:1px solid var(--line);border-radius:18px;padding:26px;text-align:center;position:relative;overflow:hidden}
+.gc-F{background:linear-gradient(160deg,#2a1410,#1c2330)}.gc-D{background:linear-gradient(160deg,#2a1c10,#1c2330)}
+.gc-C{background:linear-gradient(160deg,#2a2410,#1c2330)}.gc-B{background:linear-gradient(160deg,#102a1a,#1c2330)}
+.bigletter{font-size:96px;font-weight:900;line-height:1;position:relative}
+.bl-F{color:var(--gradF);text-shadow:0 0 40px rgba(248,81,73,.45)}
+.bl-D{color:var(--gradD);text-shadow:0 0 40px rgba(232,112,42,.45)}
+.bl-C{color:var(--gradC);text-shadow:0 0 40px rgba(210,153,34,.45)}
+.score100{font-size:18px;color:var(--mut);margin-top:6px;position:relative}
+.heroread h2{font-size:21px;font-weight:800;margin-bottom:10px}
+.heroread p{color:var(--mut);font-size:15.5px}
+.heroread .tag{display:inline-block;margin-top:14px;padding:6px 12px;border:1px solid var(--line);border-radius:999px;font-size:13px;color:var(--ink);background:var(--panel)}
+section{padding:34px 0;border-bottom:1px solid var(--line)}
+.h{font-size:13px;color:var(--mut);text-transform:uppercase;letter-spacing:.14em;font-weight:700;margin-bottom:18px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media(max-width:760px){.grid{grid-template-columns:1fr}}
+.row{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:14px 16px;display:grid;grid-template-columns:1fr auto;gap:10px;align-items:center}
+.rname{font-weight:600;font-size:15px}
+.bar{height:7px;background:#0b0f15;border-radius:99px;margin-top:9px;overflow:hidden}
+.fill{height:100%;border-radius:99px}
+.badge{font-weight:800;font-size:15px;min-width:46px;height:46px;border-radius:10px;display:flex;align-items:center;justify-content:center;color:#0d1117}
+.gF{background:var(--gradF)}.gD{background:var(--gradD)}.gC{background:var(--gradC)}.gB{background:var(--gradB);color:#06210f}.gA{background:var(--gradA);color:#06210f}
+.sc{font-size:12px;color:var(--mut);margin-top:3px}
+.flag{background:linear-gradient(160deg,#2a1410,#161b22);border:1px solid #6f2a1f;border-radius:14px;padding:20px 22px;margin-bottom:14px}
+.flag .lab{font-size:12px;text-transform:uppercase;letter-spacing:.12em;color:var(--bad);font-weight:700;margin-bottom:8px}
+.win{background:linear-gradient(160deg,#0f2417,#161b22);border:1px solid #1f6f3a;border-radius:14px;padding:20px 22px;margin-bottom:14px}
+.win .lab{font-size:12px;text-transform:uppercase;letter-spacing:.12em;color:var(--good);font-weight:700;margin-bottom:8px}
+.warn{background:linear-gradient(160deg,#2a2410,#161b22);border:1px solid #6f5a1f;border-radius:14px;padding:20px 22px;margin-bottom:14px}
+.warn .lab{font-size:12px;text-transform:uppercase;letter-spacing:.12em;color:var(--gradC);font-weight:700;margin-bottom:8px}
+.flag p,.win p,.warn p{color:var(--mut);font-size:14.5px;margin-bottom:9px}
+.flag p:last-child,.win p:last-child,.warn p:last-child{margin-bottom:0}
+.flag b,.win b,.warn b{color:var(--ink)}
+.flag ul,.win ul,.warn ul{margin:0 0 9px 20px;color:var(--mut);font-size:14.5px}
+.flag li,.win li,.warn li{margin-bottom:6px}
+.code{background:#0b0f15;border:1px solid var(--line);border-radius:8px;padding:14px 16px;margin:12px 0;font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:12.5px;line-height:1.85;color:var(--mut);overflow-x:auto}
+.code .ph{color:#ff9d94;font-weight:700}.code .ok{color:#84e0a8;font-weight:700}.code .c{color:#5b6672}
+.cmp{width:100%;border-collapse:collapse;font-size:14px;background:var(--panel);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+.cmp th{text-align:left;padding:11px 14px;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--mut);border-bottom:1px solid var(--line);font-weight:700}
+.cmp td{padding:11px 14px;border-bottom:1px solid var(--line);color:var(--mut);vertical-align:top}
+.cmp tr:last-child td{border-bottom:none}.cmp td b{color:var(--ink)}.cmp tr.you td{background:#241a12}
+.cmp .yes{color:var(--good);font-weight:700}.cmp .no{color:var(--bad);font-weight:700}
+.opp{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+@media(max-width:760px){.opp{grid-template-columns:1fr}}
+.ocard{background:linear-gradient(160deg,#0f2417,#161b22);border:1px solid #1f6f3a;border-radius:14px;padding:20px;text-align:center}
+.ocard .lab{font-size:12px;text-transform:uppercase;letter-spacing:.12em;color:var(--mut)}
+.ocard .big{font-size:30px;font-weight:900;color:var(--good);margin:8px 0 2px}
+.ocard .small{font-size:13px;color:var(--mut)}
+.oppnote{color:var(--mut);font-size:14px;margin-top:14px}.oppnote b{color:var(--ink)}
+.arrow{display:flex;align-items:center;justify-content:center;gap:18px;margin:6px 0 2px;flex-wrap:wrap}
+.pill{font-size:60px;font-weight:900;line-height:1}
+.pill.from-F{color:var(--gradF)}.pill.from-D{color:var(--gradD)}.pill.from-C{color:var(--gradC)}
+.pill.to{color:var(--gradA)}
+.pilllab{font-size:12px;color:var(--mut);text-align:center;text-transform:uppercase;letter-spacing:.1em}
+.ar{font-size:34px;color:var(--mut)}
+ul.road{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:10px}
+@media(max-width:760px){ul.road{grid-template-columns:1fr}}
+ul.road li{background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:8px;padding:11px 14px;font-size:14.5px}
+.road2 li{border-left-color:var(--good)}
+.cta{text-align:center;padding:40px 0 56px}
+.cta h2{font-size:22px;font-weight:800;margin-bottom:8px}
+.cta p{color:var(--mut);font-size:15px}
+footer{color:var(--mut);font-size:12.5px;text-align:center;padding:22px 0 40px;line-height:1.7}
+.gscale{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:26px 26px 20px;margin-top:16px}
+.gscale .gtitle{font-size:12px;text-transform:uppercase;letter-spacing:.12em;color:var(--mut);font-weight:700;margin-bottom:26px;text-align:center}
+.gtrack{position:relative;height:14px;border-radius:8px;background:linear-gradient(90deg,#f85149 0%,#f85149 18%,#e3833c 34%,#d4a72c 52%,#7ec46a 74%,#3fb950 100%);margin:0 4px}
+.gmark{position:absolute;top:-46px;transform:translateX(-50%);text-align:center;white-space:nowrap}
+.gmark .gm-lab{font-size:10.5px;text-transform:uppercase;letter-spacing:.1em;color:var(--mut);font-weight:700}
+.gmark .gm-val{font-size:19px;font-weight:900;line-height:1.15}
+.gmark:after{content:"";position:absolute;left:50%;top:100%;width:2px;height:22px;transform:translateX(-50%);background:currentColor;opacity:.75}
+.gmark.now{color:var(--bad)}.gmark.now .gm-val{color:var(--bad)}
+.gmark.proj{color:var(--good)}.gmark.proj .gm-val{color:var(--good)}
+.gmark.proj{top:auto;bottom:-52px}
+.gmark.proj:after{top:auto;bottom:100%}
+.gdot{position:absolute;top:50%;width:16px;height:16px;border-radius:50%;transform:translate(-50%,-50%);border:3px solid #0d1117}
+.gdot.now{background:var(--bad)}.gdot.proj{background:var(--good)}
+.gticks{display:flex;justify-content:space-between;margin:66px 4px 0;font-size:11px;letter-spacing:.08em;color:var(--mut);font-weight:700}
+@media(max-width:620px){.gmark .gm-lab{font-size:9px}.gmark .gm-val{font-size:16px}}
+</style></head><body>
+<header>
+  <div class="wrap">
+    <div class="eyebrow">Competitor Analysis &middot; Driveways &amp; Paving &middot; Manchester</div>
+    <h1>You Are Level With The Biggest Firm In Your Market On Pages. You Are 45&ndash;0 Down On Content.</h1>
+    <div class="sub">Prepared for Francis Maguire &middot; Insight PS Limited &middot; 11 September 2026 &middot; AG1 Consulting</div>
+
+    <div class="hero">
+      <div class="gradecard gc-F">
+        <div class="bigletter bl-F" style="font-size:46px">45 &ndash; 0</div>
+        <div class="score100">their guides vs yours</div>
+      </div>
+      <div class="heroread">
+        <h2>Dalys Driveways has 721 area pages. You have 732. That part is a dead heat.</h2>
+        <p>Which is genuinely impressive, because they have been trading since 1969 and you incorporated
+        this year. On the structural work, <b>you are level with the most established name in
+        Manchester paving.</b></p>
+        <p>The difference is everything around it: <b>45 guides, a gallery, an about page</b> &mdash;
+        and, in your case, no analytics to tell you whether any of your 732 pages is working.</p>
+        <div class="tag">Counted from each firm's own published sitemap, 11 September 2026</div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section>
+  <div class="wrap">
+    <div class="h">The Comparison</div>
+    <table class="cmp">
+      <tr>
+        <th></th>
+        <th>Dalys Driveways</th>
+        <th>DrivePave Ltd</th>
+        <th class="you">Insight PS</th>
+      </tr>
+      <tr><td><b>Total pages published</b></td>
+        <td class="yes">778</td><td>86</td><td class="yes">747</td></tr>
+      <tr><td><b>Town / area pages</b></td>
+        <td class="yes">721</td><td class="no">6</td><td class="yes"><b>732</b></td></tr>
+      <tr><td><b>Guides, advice or blog content</b></td>
+        <td class="yes"><b>45</b></td><td class="no">None found</td><td class="no"><b>0</b></td></tr>
+      <tr><td><b>Gallery page</b></td>
+        <td class="yes">Yes</td><td class="yes">Yes</td><td class="no">None in sitemap</td></tr>
+      <tr><td><b>About page</b></td>
+        <td class="yes">Yes</td><td class="yes">Yes</td><td class="no">None in sitemap</td></tr>
+      <tr><td><b>Years trading (as stated publicly)</b></td>
+        <td class="yes">Since 1969</td><td>25+ years</td><td>25+ years</td></tr>
+      <tr><td><b>Roofing pages</b></td>
+        <td class="no">0</td><td class="no">0</td><td class="no">0 &mdash; though you sell roofing</td></tr>
+      <tr><td><b>Careers page</b></td>
+        <td class="no">None</td><td class="no">None</td><td class="no">None</td></tr>
+      <tr><td><b>Analytics found in served page</b></td>
+        <td>None found</td><td>None found</td><td class="no">None found</td></tr>
+    </table>
+    <div class="tag" style="margin-top:12px">Page counts were read from each firm's own published
+    sitemap on 11 September 2026. "None found" on analytics means none was present in the HTML served
+    to us &mdash; it is not proof of absence, and we did not assess anyone's server-side measurement.</div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="h">Two Matrices, Built Differently</div>
+    <div class="code">
+Dalys Driveways &mdash; town first, then service:
+
+  /areas/<span class="ok">chorlton</span>
+  /areas/<span class="ok">walkden</span>/tarmac
+  /areas/<span class="ok">hyde</span>/patio-construction
+  /areas/<span class="ok">wythenshawe</span>/landscaping
+  /areas/<span class="ok">warrington</span>/tarmac
+  /areas/<span class="ok">crewe</span>/block-paving          <span class="ok">&lt;- Cheshire, beyond Manchester</span>
+
+Insight PS &mdash; service first, then town:
+
+  /block-paving/<span class="ok">oldham</span>
+  /resin-bound-driveways/<span class="ok">bolton</span>
+  /garden-fencing/<span class="ok">mossley</span>
+  /indian-sandstone-patios/<span class="ok">walkden</span>
+
+Both work. But note what theirs does that yours does not:
+
+  A page for the TOWN ITSELF        <span class="ok">/areas/chorlton</span>
+  Your equivalent                   <span class="ph">does not exist</span>
+    </div>
+    <div class="flag">
+      <div class="lab">The hub page is the bit you are missing</div>
+      <p>Dalys has a page for each town on its own, as well as a page for each service in that town.
+      That town page acts as a hub &mdash; it catches somebody searching just "driveways Chorlton", and
+      it passes authority down to the twelve service pages beneath it.</p>
+      <p>Your structure goes straight to <span style="font-family:monospace">/block-paving/oldham</span>
+      with nothing sitting above it for Oldham as a place. <b>You have the harder half built and are
+      missing the easy half.</b> Sixty-one extra pages would close it.</p>
+      <p>Also worth seeing: <b>they reach past Greater Manchester</b> &mdash; Crewe, Nantwich,
+      Warrington. Whether that is a market you want is a business question, not a website one.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="h">The 45 Guides</div>
+    <div class="warn">
+      <div class="lab">This is where the enquiry actually starts</div>
+      <p>Nobody wakes up searching "block paving Oldham". They start weeks earlier, searching things
+      like <i>how much does a resin driveway cost</i>, <i>block paving vs tarmac</i>, <i>why is my
+      driveway sinking</i>, or <i>do I need planning permission for a driveway</i>.</p>
+      <p><b>Dalys has 45 pages positioned for that stage. You have none.</b> So the person doing their
+      homework meets them first, and by the time they are searching for a paver in a named town they
+      have already been reading a competitor's answers for a fortnight.</p>
+      <p>This is the cheapest gap on the page to close, and it plays directly to twenty-five years of
+      knowing why driveways fail &mdash; which is content you can produce and most firms cannot.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="h">Where You Can Actually Win</div>
+    <div class="win">
+      <div class="lab">You are much closer to the front of this market than you probably think</div>
+      <ul>
+        <li><b>You have matched a firm trading since 1969 on structural coverage.</b> 732 town pages
+        against 721. Most of this market is not remotely in that conversation &mdash; the next firm we
+        checked had six.</li>
+        <li><b>Your structured data is better than theirs.</b> You publish LocalBusiness markup,
+        geo-coordinates, opening hours, a price range and a real FAQ block. That is work most
+        competitors have not done.</li>
+        <li><b>Nobody in this set has a careers page.</b> You told us staff is the constraint that is
+        stopping you taking on more work. The channel that would fix it is empty for everyone.</li>
+        <li><b>Nobody in this set sells roofing.</b> You already say you do. That is a genuine
+        differentiator in a market where every competitor is a driveway-only firm &mdash; and it is
+        currently invisible because you have no roofing pages.</li>
+        <li><b>Ground-to-roof is a real positioning advantage.</b> One contractor, one visit, one set of
+        insurance, for a homeowner who needs a drive and a roof seen to. None of these firms can say it.</li>
+        <li><b>Fourteen years of trade-body history.</b> Dalys has longevity you cannot buy; you have
+        more of it than any other firm here, and it is under-used on the site.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="h">What We Could Not Check</div>
+    <div class="warn">
+      <div class="lab">Marked honestly rather than guessed</div>
+      <ul>
+        <li><b>Actual search rankings.</b> No rank tracker has been run against any firm here. Page
+        counts are structural evidence, not a ranking report, and a bigger site does not automatically
+        outrank a smaller one.</li>
+        <li><b>Review counts and ratings.</b> <b>No competitor's review count or rating is stated
+        anywhere in this document</b>, and we did not audit anyone's trade profiles including yours.</li>
+        <li><b>Two firms returned no sitemap to us</b> &mdash; Pave Resin Ltd and JM Driveways
+        Manchester. That means we could not count their pages. <b>It is not evidence that they are
+        small</b>, and they were left out of the table rather than guessed at.</li>
+        <li><b>Analytics on competitor sites.</b> We found no tracking code in the HTML served to us
+        for any firm, but modern frameworks can load measurement in ways an outside check will not see.
+        <b>We make no claim about what any competitor measures.</b></li>
+        <li><b>The quality of anyone's town pages, yours included.</b> We counted the structure. We did
+        not grade the writing on 732 pages, and thin town pages can hurt rather than help.</li>
+        <li><b>Google Business Profiles and the map pack.</b> Not assessed for any firm. In this trade
+        that often produces more enquiries than the website does.</li>
+        <li><b>Whether these firms advertise vacancies elsewhere.</b> We checked their own websites only.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<div class="cta">
+  <div class="wrap">
+    <h2>732 pages against 721. You are not behind on effort.</h2>
+    <p>You are behind on the town hub pages, the guides, and knowing which of it works.</p>
+  </div>
+</div>
+
+<footer>
+  <div class="wrap">
+    Prepared by Andrei Givero &middot; AG1 Consulting &middot; 11 September 2026<br><br>
+    For Francis Maguire, Insight PS Limited (Companies House number <b>16297136</b>), Manchester.
+    <b>Every page count and page address on this page was read from that company's own published XML
+    sitemap on 11 September 2026 and is reproducible.</b> Cells marked "none found" or "not assessed"
+    record what our check did or did not return on that date and <b>must not be read as proof of
+    absence</b> &mdash; in particular, two firms returned no sitemap to us and were therefore excluded
+    from the page-count table rather than estimated. <b>We have not seen inside any company's
+    analytics, advertising accounts, customer records or financial records, and we make no claim
+    whatsoever about any competitor's traffic, spend, rankings, revenue, headcount, pricing or the
+    quality of their work</b> &mdash; a published page count is evidence of a website and nothing more.
+    <b>No competitor's pricing, review count or rating appears anywhere in this document.</b> The
+    founding year attributed to Dalys Driveways and the years-of-experience figures are as those firms
+    state them publicly and have not been independently verified. Company and trading names are used
+    for identification only and belong to their respective owners; <b>nothing in this document is a
+    comment on the competence, conduct or standing of any named business.</b> Insight PS's own figures
+    &mdash; 747 published URLs, twelve services, sixty-one towns per service, no URL containing "roof",
+    no careers page and no guide or blog content &mdash; were read from insightps.co.uk's own sitemap on
+    the same date. The shortage of staff and the fourteen years with Checkatrade are <b>as reported by
+    Francis Maguire to our team and have not been independently verified.</b> <b>No revenue, enquiry
+    volume, ranking position or return figure is forecast anywhere in this document</b>, and no claim is
+    made about what any work described here would produce.
+  </div>
+</footer>
+</body></html>
